@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on What, Why, How</title>
-    <link>http://sedihub.github.io/posts/</link>
+    <link>https://sedihub.github.io/posts/</link>
     <description>Recent content in Posts on What, Why, How</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Jul 2020 12:10:59 -0400</lastBuildDate>
     
-	<atom:link href="http://sedihub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://sedihub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Restart</title>
-      <link>http://sedihub.github.io/posts/restart/</link>
+      <link>https://sedihub.github.io/posts/restart/</link>
       <pubDate>Sat, 04 Jul 2020 12:10:59 -0400</pubDate>
       
-      <guid>http://sedihub.github.io/posts/restart/</guid>
+      <guid>https://sedihub.github.io/posts/restart/</guid>
       <description>I finally overcame the innate resistance we all experience when forced to change and started migrating my projects and blog posts. This will take some time as I have to also update my old projects, which I likely wouldn&amp;rsquo;t have done if I hadn&amp;rsquo;t to move my contents to here. Setting things up took some effort, but I&amp;rsquo;m pleased with the better organization and centralization.</description>
     </item>
     
