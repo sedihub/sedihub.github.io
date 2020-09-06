@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <title>Bessel&#39;s Correction - Side Notes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://sedihub.github.io/css/bootstrap.css">
+    <link rel="stylesheet" href="https://sedihub.github.io/css/custom.css">
+</head>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<body>
+
+    <main id="main">
+        <div class="container">
+            <div class="row justify-content-center text-center my-5">
+                <div class="col-lg-10">
+                    
+                    <h1 class="mb-4 text-center">Bessel&#39;s Correction</h1>
+                    <p class="small mb-5 text-center"><span class="text-uppercase">September 6, 2020</span></p>
+                </div>
+                <div class="col-9 text-right">
+                    <a href="https://sedihub.github.io" class="text-secondary">Home</a>
+                </div>
+            </div>
+        </div>
+        <div class="bg-skew bg-skew-light">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <article class="pb-2">
+                            <p>Prelude: This is one my old posts from my old blog, Digressions.</p>
+<p>Have you ever wondered why the sample variance of $n$ random variable has $n-1$ in the denominator instead of $n$?</p>
+<p>$$
+\sigma^2_{n} = \frac{1}{\underbrace{\mathbf{n-1}}<em>{\text{instead of }\mathbf{n}}}\sum_{i=1}^{n} (X</em>{i}^2 - \bar{X}),
+$$
+where, $\bar{X}=\frac{1}{n}\sum_{i=1}^{n} X_i$ is the mean  of the $n$ instances of the random variable.</p>
+<p>The reason for the appearance of $\frac{1}{n-1}$ instead of $\frac{1}{n}$ is that the above expression for variance is not the estimated variance and is the <a href="http://mathworld.wolfram.com/BesselsCorrection.html">Bessel-corrected</a> estimated variance. We need Bessel&rsquo;s correction because we are not interested in the variance of the $n$ instances of the random variable, and often want to estimate the variance of the underlying distribution from observing $X$.</p>
+<p>Suppose that the random variable $X$ is distributed according to a distribution with the variance $\sigma^2_{\text{Dist.}}$. For instance, the normal distribution $N(\mu,\sigma)$ with the variance $\sigma^2$ or the Gamma distribution $\Gamma(k,\theta)$ with the variance $\sigma^2_{\Gamma}=k\theta^2$. We may ask how good of an approximation the variance obtained from the $n$ instances of the random variable $X$ the usual way (i.e., $\frac{1}{n}\sum\cdots$), $\sigma^2_{n}$, is for the true variance of the underlying distribution $\sigma^2_{\text{Dist.}}$. Perhaps somewhat counterintuitively, the answer is that it is not a very good approximation, particularly when the number of observations/instances $n$ is not that large. This is why we need Bessel&rsquo;s correction.</p>
+<p>Before delving into the derivation of the Bessel&rsquo;s correction formula, we need to put the intuitive notion of &ldquo;better approximation&rdquo; on more rigorously mathematical grounds. First we note that the estimated variance for the $n$ instances of the random variable $\sigma^{2}_{n}$ itself can be regarded as a random variable. From this perspective, we want to know, for a given $n$, on average how close $\sigma^{2}_{n}$ is to the true variance of the underlying distribution, i.e., we will be interested in $\mathbf{E}\left[ \sigma^{2}_{n} \right]$.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h1 id="proof-for-a-normally-distributed-random-variable">Proof for a Normally-Distributed Random Variable</h1>
+<p>Now we are ready to dive into the derivation of Bessel&rsquo;s correction factor, $\frac{n}{n-1}$. Let&rsquo;s start with the specific case of the random variable $X$ being drawn from the normal distribution $N(\mu,\sigma)$. We start by rewriting the expression for $\sigma^2_{n}$ as</p>
+<p>$$
+\sigma^2_{n}
+=
+\frac{1}{n}\sum_{i=1}^{n}X_{i}^2 - \frac{1}{n^2}\left(\sum_{i=1}^{n}X_{i}\right)^2
+$$</p>
+<p>Next, let&rsquo;s regard the two terms in the above expression, $ \sum_{i=1}^{n}X_{i}^2$ and $\left(\sum_{i=1}^{n}X_{i}\right)^2$, as two random variables. Note that, these two terms are not two independent random variables, but, as we will see in the general proof of the Bessel&rsquo;s correction, this does not affect our argument as we are only interested in the average of their sum. The first term, $\sum_{i=1}^{n}X_{i}^2$ ,is a random variable drawn from a <a href="https://en.wikipedia.org/wiki/Chi-squared_distribution">Chi-squared</a> ($\chi^2$) distribution. The expression in the brackets in the second term, $\sum_{i=1}^{n}X_{i}$, is a random variable drawn from a <a href="https://en.wikipedia.org/wiki/Sum_of_normally_distributed_random_variables">normal distribution obtained from the sum</a> of $n$ identical normal distributions (the underlying normal distribution of the original random variable $X$). Therefore, for the second term, $\left(\sum_{i=1}^{n}X_{i}\right)^2$, is a (different) Chi-squared-distributed random variable. In summary:</p>
+<p>$$
+\frac{1}{n}
+\underbrace{
+\sum_{i=1}^{n}X_{i}^2
+}_{\chi^2_{n,\sigma}\<br>
+\text{ random variable}}
+\quad\text{and}\quad
+\frac{1}{n^2}
+\underbrace{
+\left(
+\overbrace{\sum_{i=1}^{n}X_{i}}^{N(n\mu,\sqrt{n}\sigma)\text{ random variable}}
+\right)^2
+}_{\chi^2_{1,\sqrt{n}\sigma}\text{ random variable}}.
+$$</p>
+<p>Recall from the above discussion that we are actually interested in $\mathbf{E}\left[\sigma^{2}_{n} \right]$. For the average of the sum of the two terms, we obtain. All we need is the expectation of a non-central Chi-squared-distributed random variable, which, for a degree $k$ Chi-squared distribution based on a $N(\mu,\sigma)$ distribution, is $k\sigma^2+k\mu^2$. We finally get:</p>
+<p>$$
+\begin{align}
+\mathbf{E}\left[ \sigma^2_n \right]
+&amp;=
+\frac{1}{n}\mathbf{E}\left[ \sum_{i=1}^{n}X_{i}^2 \right]
+-
+\frac{1}{n^2}\mathbf{E}\left[  \left(\sum_{i=1}^{n}X_{i}\right)^2 \right]
+\\<br>
+&amp;=\frac{1}{n}(n\sigma^2+n\mu^2)  - \frac{1}{n^2}(n\sigma^2+n^2\mu^2)
+\\<br>
+&amp;=
+\mathbf{
+\frac{n-1}{n}\sigma^2
+}.
+\end{align}
+$$</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h1 id="general-proof">General Proof</h1>
+<p>Now that we have proven Bessel&rsquo;s correction in the specific case of normal distributions, we are ready to generalize to other distributions. We observed that Bessel&rsquo;s correction originates from the expectation of the two terms in the expression for $\sigma^2_{n}$:</p>
+<p>$$
+\begin{align}
+\mathbf{E}\left[ \sigma^2_n \right]
+=&amp;
+\frac{1}{n}\mathbf{E}\left[ \sum_{i=1}^{n}X_{i}^2 \right]
+-
+\frac{1}{n^2}\mathbf{E}\left[  \left(\sum_{i=1}^{n}X_{i}\right)^2 \right]
+\\<br>
+=&amp;
+\frac{1}{n}\sum_{i=1}^{n} \mathbf{E}\left[ X_{i}^2 \right]
+-
+\frac{1}{n^2}\left(
+\sum_{i=1}^{n}\mathbf{E}\left[  X_{i}^2 \right]
++
+\sum_{\substack{i=1,j= \\ i \neq j}}^{n}\sum_{i=1}^{n}\mathbf{E}\left[  X_{i}X_{j} \right]
+\right)
+\end{align}
+$$</p>
+<p>Now, all we need is $\mathbf{E}\left[  X_{i}^2 \right]$ and $\mathbf{E}\left[  X_{i}X_{j} \right]$. Since the instances of the random variable $X$ are uncorrelated, i.e., $X$ is drawn from its underlying distribution completely randomly, we conclude that $\mathbf{E}\left[  X_{i}^2 \right]$ is the same for all $i$ and also that $\mathbf{E}\left[  X_{i}X_{j} \right]$ factorizes (see <a href="https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables_%28Bienaym%C3%A9_formula%29">Bienayme formula</a>). In addition, from the definition of variance for any distribution, we know that $\sigma^2 = \mathbf{E}\left[X^2\right] - \mathbf{E}\left[X\right]^2$. We finally obtain:</p>
+<p>$$
+\begin{align}
+\mathbf{E}\left[ \sigma^2_n \right]
+=&amp;
+\frac{1}{n} n \mathbf{E}\left[ X^2 \right]
+-
+\frac{1}{n^2}\left(
+n\mathbf{E}\left[  X^2 \right]
++
+n(n-1)\mathbf{E}\left[ X\right]\mathbf{E}\left[ X\right]
+\right)
+\\<br>
+=&amp;
+\frac{1-n}{n} \mathbf{E}\left[ X^2 \right]
+-
+\frac{n-1}{n}\mathbf{E}\left[ X\right]^2
+\\<br>
+=&amp;
+\mathbf{
+\frac{1-n}{n} \sigma^2
+}.
+\end{align}
+$$</p>
+
+                            <p class="mt-5 text-center">
+                                
+                                
+                            </p>
+                        </article>
+                        <div class="row pt-5 pb-5">
+                            <div class="col-6 text-left">
+                            
+                              <a class="text-reset" href="https://sedihub.github.io/posts/reinforcement_learning_cheat_sheet/">&larr; Reinforcement Learning Cheat Sheet</a>
+                            
+                            </div>
+                            <div class="col-6 text-right">
+                            
+                            </div>
+                        </div>                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<footer class="site-footer mt-5">
+  <div class="container">
+      <div class="row justify-content-md-between">
+          <div class="col-sm-12 col-md-4 mb-4">
+              <h2 class="h5 mb-3">Side Notes</h2>
+              <p>A Collection of my project notes.</p>
+          </div>
+          <div class="col-4 col-md-2 mb-4">
+              <h2 class="h5 mb-3">Menu</h2>
+              <ul class="nav flex-column">
+                  <li class="mb-1"><a href="https://sedihub.github.io" class="text-secondary">Home</a></li>
+                  
+              </ul>
+          </div>
+      </div>
+
+      <hr/>
+
+
+  </div>
+</footer>
+</body>
+</html>
+
