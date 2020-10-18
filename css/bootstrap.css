@@ -193,6 +193,9 @@ figure {
 }
 
 img {
+  width:100%;
+  /*max-width: 100%; */
+  height: auto;
   vertical-align: middle;
   border-style: none;
 }
@@ -4852,8 +4855,8 @@ input[type="button"].btn-block {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
   width: 100%;
 }
 

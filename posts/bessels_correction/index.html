@@ -54,7 +54,7 @@
                             <p>(This is one of my old posts from my old blog, Digressions.)</p>
 <p>Have you ever wondered why the sample variance of $n$ random variable has $n-1$ in the denominator instead of $n$?</p>
 <p>$$
-\sigma^2_{n} = \frac{1}{\underbrace{\mathbf{n-1}}_{\text{instead of }\mathbf{n}}}\sum_{i=1}^{n} (X_{i}^2 - \bar{X}),
+\sigma^2_{n} = \frac{1}{\underbrace{\mathbf{n-1}}_{\text{instead of }\mathbf{n}}}\sum_{i=1}^{n} (X_{i} - \bar{X})^2,
 $$
 where, $\bar{X}=\frac{1}{n}\sum_{i=1}^{n} X_i$ is the mean  of the $n$ instances of the random variable.</p>
 <p>The reason for the appearance of $\frac{1}{n-1}$ instead of $\frac{1}{n}$ is that the above expression for variance is not the estimated variance and is the <a href="http://mathworld.wolfram.com/BesselsCorrection.html">Bessel-corrected</a> estimated variance. We need Bessel&rsquo;s correction because we are not interested in the variance of the $n$ instances of the random variable, and often want to estimate the variance of the underlying distribution from observing $X$.</p>
